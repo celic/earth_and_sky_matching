@@ -1,4 +1,4 @@
-earth_and_sky_matching
+Earth and Sky Matching
 ======================
 
 A matching study game for Earth and Sky
