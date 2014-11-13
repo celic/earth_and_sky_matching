@@ -9,3 +9,16 @@ body {
 	text-align: center;
 }
 
+.row {
+	padding-top: 4px;
+}
+
+.grid {
+	padding-top: 50px;
+	text-align: center;
+}
+
+.instructions {
+	padding-top: 50px;
+	text-align: center;
+}
