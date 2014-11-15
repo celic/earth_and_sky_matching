@@ -34,9 +34,6 @@ $(document).ready(function(){
 			
 			}else{
 
-				// Delay
-				//sleep(2000);
-
 				second_clicked = sel.target.id;
 				clicked = 0;
 
@@ -51,13 +48,4 @@ $(document).ready(function(){
 			}
 		});
 	});
-
-	function sleep(milliseconds){
-	 	var start = new Date().getTime();
-		for(var i = 0; i < 1e7; i++){
-	    	if((new Date().getTime() - start) > milliseconds){
-	      		break;
-	    	}
-	  	}
-	}
 });
