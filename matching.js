@@ -22,7 +22,10 @@ $(document).ready(function(){
 
 	$(document).on('click', '.box', function (sel){
 
-		alert(sel.target.id);
+		var box_id = "#" + sel.target.id;
+
+		$(box_id).fadeTo(600, 0);
+
 	});
 
 });
