@@ -50,39 +50,47 @@ $(document).ready(function(){
 
 	$(document).on('click', '.box', function (sel){
 
-		var box_id = "#" + sel.target.id;
-		$(box_id).fadeTo(500, 0, function() {
-			
-			if(clicked == 0){
+		// Get a tmp box
+		var tmp_box = "#" + sel.target.id;
+		$tmp_box = $(tmp_box);
 
-				// Just let it sit until the next one is clicked
-				first_clicked = sel.target.id;
-				clicked = 1;
+		// Make sure the box clicked is not the same box and that the box is not hidden
+		if(first_clicked != sel.target.id && $tmp_box.css('opacity') != 0){
+
+			var box_id = "#" + sel.target.id;
+			$(box_id).fadeTo(500, 0, function() {
 				
-			}else{
+				if(clicked == 0){
 
-				second_clicked = sel.target.id;
-				clicked = 0;
-
-				// Check match
-				if(is_match()){
-
-					// Keep faded
-
+					// Just let it sit until the next one is clicked
+					first_clicked = sel.target.id;
+					clicked = 1;
+					
 				}else{
-					
-					// Revert fade
-					var box_id1 = "#" + first_clicked;
-					var box_id2 = "#" + second_clicked;
 
-					$(box_id1).fadeTo(500, 1);
-					$(box_id2).fadeTo(500, 1);
-					
+					second_clicked = sel.target.id;
+					clicked = 0;
+
+					// Check match
+					if(is_match()){
+
+						// Keep faded
+
+					}else{
+						
+						// Revert fade
+						var box_id1 = "#" + first_clicked;
+						var box_id2 = "#" + second_clicked;
+
+						$(box_id1).fadeTo(500, 1);
+						$(box_id2).fadeTo(500, 1);
+						
+					}
+
+
 				}
-
-
-			}
-		});
+			});
+		}
 	});
 
 	function shuffle(array){
@@ -122,6 +130,11 @@ $(document).ready(function(){
 
 	function is_match(){
 
-		return true;
+		if(Math.random() > .5){
+
+			return true;
+		}else{
+			return false;
+		}
 	}
 });
