@@ -19,6 +19,10 @@ $(document).ready(function(){
 
 	$match_counter = $('#matches');
 
+	$picture = $('#picture');
+	$description = $('#description');
+	$long_description = $('#long_description');
+
 	var clicked = 0;
 	var matches = 0;
 	var first_clicked = -1;
@@ -28,22 +32,22 @@ $(document).ready(function(){
 	var game_board = [];
 
 	var content = [
-					{"picture": 0, "description": 0, "long_description": 0},
-					{"picture": 1, "description": 1, "long_description": 1},
-					{"picture": 2, "description": 2, "long_description": 2},
-					{"picture": 3, "description": 3, "long_description": 3},
-					{"picture": 4, "description": 4, "long_description": 4},
-					{"picture": 5, "description": 5, "long_description": 5},
-					{"picture": 6, "description": 6, "long_description": 6},
-					{"picture": 7, "description": 7, "long_description": 7},
-					{"picture": 8, "description": 8, "long_description": 8},
-					{"picture": 9, "description": 9, "long_description": 9},
-					{"picture": 10, "description": 10, "long_description": 10},
-					{"picture": 11, "description": 11, "long_description": 11},
-					{"picture": 12, "description": 12, "long_description": 12},
-					{"picture": 13, "description": 13, "long_description": 13},
-					{"picture": 14, "description": 14, "long_description": 14},
-					{"picture": 15, "description": 15, "long_description": 15},
+					{"picture": 0, "description": 110, "long_description": 0},
+					{"picture": 1, "description": 111, "long_description": 1},
+					{"picture": 2, "description": 112, "long_description": 2},
+					{"picture": 3, "description": 113, "long_description": 3},
+					{"picture": 4, "description": 114, "long_description": 4},
+					{"picture": 5, "description": 115, "long_description": 5},
+					{"picture": 6, "description": 116, "long_description": 6},
+					{"picture": 7, "description": 117, "long_description": 7},
+					{"picture": 8, "description": 118, "long_description": 8},
+					{"picture": 9, "description": 119, "long_description": 9},
+					{"picture": 10, "description": 1110, "long_description": 10},
+					{"picture": 11, "description": 1111, "long_description": 11},
+					{"picture": 12, "description": 1112, "long_description": 12},
+					{"picture": 13, "description": 1113, "long_description": 13},
+					{"picture": 14, "description": 1114, "long_description": 14},
+					{"picture": 15, "description": 1115, "long_description": 15},
 				  ];
 
 	content = shuffle(content);
@@ -79,11 +83,12 @@ $(document).ready(function(){
 					clicked = 0;
 
 					// Check match
-					if(is_match()){
+					if(is_match(first_clicked, second_clicked)){
 
 						// Keep faded
 
 						// Update information panel for a more expanded look
+						$long_description.text("hi");
 
 						// Increment matches
 						matches++;
@@ -143,13 +148,31 @@ $(document).ready(function(){
 		game_board = shuffle(game_board);
 	}
 
-	function is_match(){
+	function is_match(first, second){
 
-		if(Math.random() > .5){
+		// Store the clicked values to variables
+		var content1 = game_board[first];
+		var content2 = game_board[second];
 
-			return true;
-		}else{
-			return false;
+		var matched = false;
+
+		// Search for the picture and description at the same index in the game questions
+		for(var i = 0; i < game_questions.length; i++){
+
+			// If the picture has been found
+			if(game_questions[i]["picture"] == content1 || 
+			   game_questions[i]["picture"] == content2){
+
+				// If the description has been found
+				if(game_questions[i]["description"] == content1 || 
+				   game_questions[i]["description"] == content2){
+
+					matched = true;
+					break;
+				}
+			}
 		}
+
+		return matched;
 	}
 });
