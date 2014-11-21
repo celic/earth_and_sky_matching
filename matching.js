@@ -22,11 +22,31 @@ $(document).ready(function(){
 	var first_clicked = 0;
 	var second_clicked = 0;
 
-	var pictures = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-	var descriptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-	var long_descriptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+	var game_questions = [];
+	var game_board = [];
 
-	shuffle();
+	var content = [
+					{"picture": 0, "description": 0, "long_description": 0},
+					{"picture": 1, "description": 1, "long_description": 1},
+					{"picture": 2, "description": 2, "long_description": 2},
+					{"picture": 3, "description": 3, "long_description": 3},
+					{"picture": 4, "description": 4, "long_description": 4},
+					{"picture": 5, "description": 5, "long_description": 5},
+					{"picture": 6, "description": 6, "long_description": 6},
+					{"picture": 7, "description": 7, "long_description": 7},
+					{"picture": 8, "description": 8, "long_description": 8},
+					{"picture": 9, "description": 9, "long_description": 9},
+					{"picture": 10, "description": 10, "long_description": 10},
+					{"picture": 11, "description": 11, "long_description": 11},
+					{"picture": 12, "description": 12, "long_description": 12},
+					{"picture": 13, "description": 13, "long_description": 13},
+					{"picture": 14, "description": 14, "long_description": 14},
+					{"picture": 15, "description": 15, "long_description": 15},
+				  ];
+
+	content = shuffle(content);
+
+	assign_boxes();
 
 	$(document).on('click', '.box', function (sel){
 
@@ -45,56 +65,63 @@ $(document).ready(function(){
 				clicked = 0;
 
 				// Check match
+				if(is_match()){
 
-				// If match keep faded
+					// Keep faded
 
-				// If no match fade both back in
-				var box_id1 = "#" + first_clicked;
-				var box_id2 = "#" + second_clicked;
+				}else{
+					
+					// Revert fade
+					var box_id1 = "#" + first_clicked;
+					var box_id2 = "#" + second_clicked;
 
-				$(box_id1).fadeTo(500, 1);
-				$(box_id2).fadeTo(500, 1);
+					$(box_id1).fadeTo(500, 1);
+					$(box_id2).fadeTo(500, 1);
+					
+				}
+
+
 			}
 		});
 	});
 
-	function shuffle(){
+	function shuffle(array){
 
 		// Randomize an array of elements
-		var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-		for(var i = 0; i < arr.length; i++){
+		for(var i = 0; i < array.length; i++){
 		
-			var index = Math.floor(Math.random() * arr.length);
+			var index = Math.floor(Math.random() * array.length);
 		
-			var tmp = arr[i];
-			arr[i] = arr[index];
-			arr[index] = tmp;
-		}
-
-		// Align other arrays with shuffled pattern so they all stay parallel
-		for(var i = 0; i < arr.length; i++){
-
-			var index = arr[i];
-
-			var tmp = pictures[i];
-			pictures[i] = pictures[index];
-			pictures[index] = tmp;
-
-			tmp = descriptions[i];
-			descriptions[i] = descriptions[index];
-			descriptions[index] = tmp;
-
-			tmp = long_descriptions[i];
-			long_descriptions[i] = long_descriptions[index];
-			long_descriptions[index] = tmp;
+			var tmp =  array[i];
+			array[i] = array[index];
+			array[index] = tmp;
 		}
 
 		// Testing purposes
-		// for(var i = 0; i < arr.length; i++){
-		//	 console.log("------");
-		//	 console.log(pictures[i]);
-		//	 console.log(descriptions[i]);
-		// 	 console.log(long_descriptions[i]);
-		// }
+		//for(var i = 0; i < array.length; i++){
+		//	console.log("------");
+		//	console.log(array[i]);
+		//}
+
+		return array;
 	};
+
+	function assign_boxes(){
+
+		// Pick first 8 elements to be on the grid (to mix up each game)
+		for(var i = 0; i < 8; i++){
+
+			game_questions[i] = content[i];
+			game_board[i] = content[i]["picture"];
+			game_board[i+8] = content[i]["description"];
+		}
+
+		// Now we have 16 boxes and 16 pictures, we need to mix them up
+		game_board = shuffle(game_board);
+	}
+
+	function is_match(){
+
+		return true;
+	}
 });
