@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	$box0 = $('#0');
 	$box1 = $('#1');
 	$box2 = $('#2');
 	$box3 = $('#3');
@@ -15,12 +16,13 @@ $(document).ready(function(){
 	$box13 = $('#13');
 	$box14 = $('#14');
 	$box15 = $('#15');
-	$box16 = $('#16');
+
+	$match_counter = $('#matches');
 
 	var clicked = 0;
 	var matches = 0;
-	var first_clicked = 0;
-	var second_clicked = 0;
+	var first_clicked = -1;
+	var second_clicked = -1;
 
 	var game_questions = [];
 	var game_board = [];
@@ -59,7 +61,11 @@ $(document).ready(function(){
 
 			var box_id = "#" + sel.target.id;
 			$(box_id).fadeTo(500, 0, function() {
-				
+
+				// Fade in the hidden box
+
+
+				// Is this the first box or the second box?
 				if(clicked == 0){
 
 					// Just let it sit until the next one is clicked
@@ -68,6 +74,7 @@ $(document).ready(function(){
 					
 				}else{
 
+					// Reset values and compare
 					second_clicked = sel.target.id;
 					clicked = 0;
 
@@ -76,6 +83,17 @@ $(document).ready(function(){
 
 						// Keep faded
 
+						// Update information panel for a more expanded look
+
+						// Increment matches
+						matches++;
+						$match_counter.text(matches);
+
+						if(matches == 8){
+
+							alert("You Win!\nRefresh the page for a new game\nwith new questions!");
+						}
+
 					}else{
 						
 						// Revert fade
@@ -83,11 +101,8 @@ $(document).ready(function(){
 						var box_id2 = "#" + second_clicked;
 
 						$(box_id1).fadeTo(500, 1);
-						$(box_id2).fadeTo(500, 1);
-						
+						$(box_id2).fadeTo(500, 1);						
 					}
-
-
 				}
 			});
 		}
