@@ -22,9 +22,9 @@ $(document).ready(function(){
 	var first_clicked = 0;
 	var second_clicked = 0;
 
-	var pictures = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-	var descriptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 12, 13, 14, 15];
-	var long_descriptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ,13, ,14, 15];
+	var pictures = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+	var descriptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+	var long_descriptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 	shuffle();
 
@@ -60,15 +60,41 @@ $(document).ready(function(){
 
 	function shuffle(){
 
-		// Randomize an array of 15 elements
-		var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-		for(var i = 0; i < 15; i++){
+		// Randomize an array of elements
+		var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+		for(var i = 0; i < arr.length; i++){
 		
-			var index = Math.floor(Math.random() * 15);
+			var index = Math.floor(Math.random() * arr.length);
 		
 			var tmp = arr[i];
 			arr[i] = arr[index];
 			arr[index] = tmp;
 		}
+
+		// Align other arrays with shuffled pattern so they all stay parallel
+		for(var i = 0; i < arr.length; i++){
+
+			var index = arr[i];
+
+			var tmp = pictures[i];
+			pictures[i] = pictures[index];
+			pictures[index] = tmp;
+
+			tmp = descriptions[i];
+			descriptions[i] = descriptions[index];
+			descriptions[index] = tmp;
+
+			tmp = long_descriptions[i];
+			long_descriptions[i] = long_descriptions[index];
+			long_descriptions[index] = tmp;
+		}
+
+		// Testing purposes
+		// for(var i = 0; i < arr.length; i++){
+		//	 console.log("------");
+		//	 console.log(pictures[i]);
+		//	 console.log(descriptions[i]);
+		// 	 console.log(long_descriptions[i]);
+		// }
 	};
 });
