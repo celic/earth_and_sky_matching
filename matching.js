@@ -32,22 +32,15 @@ $(document).ready(function(){
 	var game_board = [];
 
 	var content = [
-					{"picture": 0, "description": 110, "long_description": 0},
-					{"picture": 1, "description": 111, "long_description": 1},
-					{"picture": 2, "description": 112, "long_description": 2},
-					{"picture": 3, "description": 113, "long_description": 3},
-					{"picture": 4, "description": 114, "long_description": 4},
-					{"picture": 5, "description": 115, "long_description": 5},
+					{"picture": "images/greenflash.png", "description": 110, "long_description": "A green flash occurs just before sunrise or after sunset, and will only last a couple seconds. These green rays of light are caused by the atmosphere's ability to separate the light of the sun into it's different components."},
+					{"picture": "images/kuiperbelt.png", "description": 111, "long_description": "The Kuiper Belt is very similar to the astroid belt, but it is located beyond the orbit of Neptune. Objects in the Kuiper Belt are often icy masses of methane ammonia or water. Pluto is perhaps the most famous 'Kuiper Belt Object.'"},
+					{"picture": "images/mooncreation.png", "description": 112, "long_description": "The image describes the most prominent theory of the moon's creation. Scientists believe that a Mars-sized object collided with the Earth creating massive amounts of debris. This debris collected in an orbit around the Earth eventually compacting enough to form the Moon."},
+					{"picture": "images/moonreverse.png", "description": 113, "long_description": "The Moon has what is called 'synchronous rotation' with the Earth meaning that it orbits the Earth at the same rate it rotates around its own axis. Because of this from Earth, we only see one side of the moon. Depicted is the far side of the moon."},
+					{"picture": "images/reflectingtelescope.png", "description": 114, "long_description": "Most astronomical telescopes nowadays are reflecting telescopes because of how compact yet effective they are compared to refracting telescopes. Reflectors use concave mirrors to act as a lens reflecting the image through the same tube, extending the focal length while using less material."},
+					{"picture": "images/refractingtelescope.png", "description": 115, "long_description": "Refracting telescopes are what most people imagine a telescope to be. They are often long, skinny tubes with an objective lens on the wide end and an eyepeice on the opposite end. Because these telescopes are long and straight, they are very difficult to scale up to larger sizes."},
 					{"picture": 6, "description": 116, "long_description": 6},
 					{"picture": 7, "description": 117, "long_description": 7},
 					{"picture": 8, "description": 118, "long_description": 8},
-					{"picture": 9, "description": 119, "long_description": 9},
-					{"picture": 10, "description": 1110, "long_description": 10},
-					{"picture": 11, "description": 1111, "long_description": 11},
-					{"picture": 12, "description": 1112, "long_description": 12},
-					{"picture": 13, "description": 1113, "long_description": 13},
-					{"picture": 14, "description": 1114, "long_description": 14},
-					{"picture": 15, "description": 1115, "long_description": 15},
 				  ];
 
 	content = shuffle(content);
@@ -60,14 +53,15 @@ $(document).ready(function(){
 		var tmp_box = "#" + sel.target.id;
 		$tmp_box = $(tmp_box);
 
-		// Make sure the box clicked is not the same box and that the box is not hidden
+		// Make sure the box clicked is not the same box and that the box is not already hidden
 		if(first_clicked != sel.target.id && $tmp_box.css('opacity') != 0){
 
 			var box_id = "#" + sel.target.id;
 			$(box_id).fadeTo(500, 0, function() {
 
 				// Fade in the hidden box
-
+				$(box_id).src = game_board[sel.target.id];
+				$(box_id).fadeTo(500, 1);
 
 				// Is this the first box or the second box?
 				if(clicked == 0){
